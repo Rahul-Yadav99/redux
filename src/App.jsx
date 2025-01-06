@@ -1,14 +1,21 @@
-import { Provider } from 'react-redux'
-import store from './redux/store'
-import Login from './Login'
-
+import context from "./context"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Product from "./components/Product"
+import Detail from "./components/Detail"
+import { useState } from "react"
 const App = () => {
-
   
-  return (
-    <Provider store={store}>
-      <Login />
-    </Provider>
+  const [product, setProduct] = useState(null)
+  
+    return (
+    <context.Provider value={{product, setProduct}}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/product" element={<Product />} />
+          <Route path="/detail" element={<Detail />} />
+        </Routes>
+      </BrowserRouter>
+    </context.Provider>
   )
 }
 
